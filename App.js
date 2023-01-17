@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, SafeAreaView, View } from 'react-native';
+import { StyleSheet, Text, View, Image } from 'react-native';
 
 export default function App() {
 	const handleOnPress = () => console.log('text pressed');
@@ -12,6 +12,16 @@ export default function App() {
 				unsetting this value, which means that no lines restriction will be
 				applied.
 			</Text>
+			<Image source={require('./assets/icon.png')} />
+			<Image
+				blurRadius={10}
+				fadeDuration={1000}
+				source={{
+					width: 200,
+					height: 300,
+					url: 'https://i.picsum.photos/id/114/200/300.jpg',
+				}}
+			/>
 			<StatusBar style="auto" />
 		</View>
 	);
