@@ -1,5 +1,13 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Image } from 'react-native';
+import {
+	StyleSheet,
+	Text,
+	View,
+	Image,
+	TouchableWithoutFeedback,
+	TouchableOpacity,
+	TouchableHighlight,
+} from 'react-native';
 
 export default function App() {
 	const handleOnPress = () => console.log('text pressed');
@@ -12,16 +20,30 @@ export default function App() {
 				unsetting this value, which means that no lines restriction will be
 				applied.
 			</Text>
-			<Image source={require('./assets/icon.png')} />
-			<Image
-				blurRadius={10}
-				fadeDuration={1000}
-				source={{
-					width: 200,
-					height: 300,
-					url: 'https://i.picsum.photos/id/114/200/300.jpg',
-				}}
-			/>
+			<TouchableHighlight onPress={() => console.log("Don't touch this!!!")}>
+				<Image
+					source={{
+						width: 200,
+						height: 200,
+						url: 'https://i.picsum.photos/id/9/200/200.jpg',
+					}}
+				/>
+			</TouchableHighlight>
+			<TouchableOpacity onPress={() => console.log("Don't touch this!!!")}>
+				<Image source={require('./assets/icon.png')} />
+			</TouchableOpacity>
+			<TouchableWithoutFeedback
+				onPress={() => console.log("Don't touch this!!!")}>
+				<Image
+					blurRadius={10}
+					fadeDuration={1000}
+					source={{
+						width: 200,
+						height: 300,
+						url: 'https://i.picsum.photos/id/114/200/300.jpg',
+					}}
+				/>
+			</TouchableWithoutFeedback>
 			<StatusBar style="auto" />
 		</View>
 	);
