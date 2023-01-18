@@ -12,77 +12,108 @@ import {
 	SafeAreaView, //only for ios
 	StatusBar as ReactStatusBar,
 	Platform,
+	Dimensions,
+	ScrollView,
 } from 'react-native';
+
+import { useDimensions } from '@react-native-community/hooks';
 
 export default function App() {
 	const handleOnPress = () => console.log('text pressed');
+
+	// dimensions
+	console.log(Dimensions.get('window'));
+	console.log(Dimensions.get('screen'));
+
+	// dimensions from hook for detecting screen rotation
+	console.log(useDimensions());
+
 	return (
 		//style can take array to apply multiple styles
 		<SafeAreaView style={[styles.container, viewBackground]}>
 			<StatusBar style="auto" />
+			<ScrollView>
+				<Text numberOfLines={1} onPress={handleOnPress}>
+					Used to truncate the text with an ellipsis after computing the text
+					layout, including line wrapping, such that the total number of lines
+					does not exceed this number. Setting this property to 0 will result in
+					unsetting this value, which means that no lines restriction will be
+					applied.
+				</Text>
 
-			<Text numberOfLines={1} onPress={handleOnPress}>
-				Used to truncate the text with an ellipsis after computing the text
-				layout, including line wrapping, such that the total number of lines
-				does not exceed this number. Setting this property to 0 will result in
-				unsetting this value, which means that no lines restriction will be
-				applied.
-			</Text>
+				<TouchableHighlight
+					onPress={() => console.log("Don't touch this - highlight!!!")}>
+					<Image
+						source={{
+							width: 200,
+							height: 300,
+							uri: 'https://picsum.photos/200/300',
+						}}
+					/>
+				</TouchableHighlight>
 
-			<TouchableHighlight
-				onPress={() => console.log("Don't touch this - highlight!!!")}>
-				<Image
-					source={{
-						width: 200,
-						height: 300,
-						uri: 'https://picsum.photos/200/300',
-					}}
+				<TouchableOpacity
+					onPress={() => console.log("Don't touch this - opacity!!!")}>
+					<Image
+						style={styles.forFavicon}
+						source={require('./assets/favicon.png')}
+					/>
+				</TouchableOpacity>
+
+				<TouchableWithoutFeedback
+					onPress={() => console.log("Don't touch this - feedback!!!")}>
+					<Image
+						style={styles.tinyLogo}
+						blurRadius={2}
+						fadeDuration={1000}
+						source={{
+							width: 200,
+							height: 300,
+							uri: 'https://reactnative.dev/img/tiny_logo.png',
+						}}
+					/>
+				</TouchableWithoutFeedback>
+				<Button
+					title="Click Me"
+					color="orange"
+					onPress={() => console.log("Don't touch button")}
 				/>
-			</TouchableHighlight>
-
-			<TouchableOpacity
-				onPress={() => console.log("Don't touch this - opacity!!!")}>
-				<Image
-					style={styles.forFavicon}
-					source={require('./assets/favicon.png')}
+				<Button
+					title="Show alert"
+					color="lightblue"
+					onPress={() =>
+						Alert.alert('My title', 'My message', [
+							{ text: 'Yes', onPress: () => console.log('yes') },
+							{ text: 'No', onPress: () => console.log('No') },
+						])
+					}
 				/>
-			</TouchableOpacity>
-
-			<TouchableWithoutFeedback
-				onPress={() => console.log("Don't touch this - feedback!!!")}>
-				<Image
-					style={styles.tinyLogo}
-					blurRadius={2}
-					fadeDuration={1000}
-					source={{
-						width: 200,
-						height: 300,
-						uri: 'https://reactnative.dev/img/tiny_logo.png',
-					}}
+				<Button
+					title="Leave msg"
+					color="lightgrey"
+					onPress={() =>
+						Alert.prompt('Your title', 'Your msg', (text) => console.log(text))
+					}
 				/>
-			</TouchableWithoutFeedback>
-			<Button
-				title="Click Me"
-				color="orange"
-				onPress={() => console.log("Don't touch button")}
-			/>
-			<Button
-				title="Show alert"
-				color="lightblue"
-				onPress={() =>
-					Alert.alert('My title', 'My message', [
-						{ text: 'Yes', onPress: () => console.log('yes') },
-						{ text: 'No', onPress: () => console.log('No') },
-					])
-				}
-			/>
-			<Button
-				title="Leave msg"
-				color="lightgrey"
-				onPress={() =>
-					Alert.prompt('Your title', 'Your msg', (text) => console.log(text))
-				}
-			/>
+
+				{/* layouts */}
+				<View
+					style={{
+						backgroundColor: 'blue',
+						width: 150,
+						height: 70,
+					}}>
+					<Text>width 150px</Text>
+				</View>
+				<View
+					style={{
+						backgroundColor: 'lightblue',
+						width: '50%',
+						height: 70,
+					}}>
+					<Text>width 50%</Text>
+				</View>
+			</ScrollView>
 		</SafeAreaView>
 	);
 }
