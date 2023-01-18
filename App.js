@@ -9,12 +9,16 @@ import {
 	TouchableHighlight,
 	Button,
 	Alert,
+	SafeAreaView, //only for ios
+	StatusBar as ReactStatusBar,
+	Platform,
 } from 'react-native';
 
 export default function App() {
 	const handleOnPress = () => console.log('text pressed');
 	return (
-		<View style={styles.container}>
+		//style can take array to apply multiple styles
+		<SafeAreaView style={[styles.container, viewBackground]}>
 			<StatusBar style="auto" />
 
 			<Text numberOfLines={1} onPress={handleOnPress}>
@@ -79,16 +83,16 @@ export default function App() {
 					Alert.prompt('Your title', 'Your msg', (text) => console.log(text))
 				}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 }
+
+const viewBackground = { backgroundColor: 'lightgreen' };
 
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		backgroundColor: 'dodgerblue',
-		alignItems: 'center',
-		justifyContent: 'center',
+		paddingTop: Platform.OS === 'android' ? ReactStatusBar.currentHeight : 0, //calculate padding for android base on status bar height
 	},
 	forFavicon: {
 		width: 20,
