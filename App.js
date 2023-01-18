@@ -7,12 +7,16 @@ import {
 	TouchableWithoutFeedback,
 	TouchableOpacity,
 	TouchableHighlight,
+	Button,
+	Alert,
 } from 'react-native';
 
 export default function App() {
 	const handleOnPress = () => console.log('text pressed');
 	return (
 		<View style={styles.container}>
+			<StatusBar style="auto" />
+
 			<Text numberOfLines={1} onPress={handleOnPress}>
 				Used to truncate the text with an ellipsis after computing the text
 				layout, including line wrapping, such that the total number of lines
@@ -20,31 +24,61 @@ export default function App() {
 				unsetting this value, which means that no lines restriction will be
 				applied.
 			</Text>
-			<TouchableHighlight onPress={() => console.log("Don't touch this!!!")}>
+
+			<TouchableHighlight
+				onPress={() => console.log("Don't touch this - highlight!!!")}>
 				<Image
 					source={{
 						width: 200,
-						height: 200,
-						url: 'https://i.picsum.photos/id/9/200/200.jpg',
+						height: 300,
+						uri: 'https://picsum.photos/200/300',
 					}}
 				/>
 			</TouchableHighlight>
-			<TouchableOpacity onPress={() => console.log("Don't touch this!!!")}>
-				<Image source={require('./assets/icon.png')} />
-			</TouchableOpacity>
-			<TouchableWithoutFeedback
-				onPress={() => console.log("Don't touch this!!!")}>
+
+			<TouchableOpacity
+				onPress={() => console.log("Don't touch this - opacity!!!")}>
 				<Image
-					blurRadius={10}
+					style={styles.forFavicon}
+					source={require('./assets/favicon.png')}
+				/>
+			</TouchableOpacity>
+
+			<TouchableWithoutFeedback
+				onPress={() => console.log("Don't touch this - feedback!!!")}>
+				<Image
+					style={styles.tinyLogo}
+					blurRadius={2}
 					fadeDuration={1000}
 					source={{
 						width: 200,
 						height: 300,
-						url: 'https://i.picsum.photos/id/114/200/300.jpg',
+						uri: 'https://reactnative.dev/img/tiny_logo.png',
 					}}
 				/>
 			</TouchableWithoutFeedback>
-			<StatusBar style="auto" />
+			<Button
+				title="Click Me"
+				color="orange"
+				onPress={() => console.log("Don't touch button")}
+			/>
+			<Button
+				title="Show alert"
+				color="lightblue"
+				onPress={() =>
+					Alert.alert('My title', 'My message', [
+						{ text: 'Yes', onPress: () => console.log('yes') },
+						{ text: 'No', onPress: () => console.log('No') },
+					])
+				}
+			/>
+			<Button
+				title="Leave msg"
+				color="lightgrey"
+				onPress={() =>
+					Alert.prompt('Your title', 'Your msg', (text) => console.log(text))
+				}
+			/>
 		</View>
 	);
 }
@@ -55,5 +89,13 @@ const styles = StyleSheet.create({
 		backgroundColor: 'dodgerblue',
 		alignItems: 'center',
 		justifyContent: 'center',
+	},
+	forFavicon: {
+		width: 20,
+		height: 20,
+	},
+	tinyLogo: {
+		width: 100,
+		height: 100,
 	},
 });
