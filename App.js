@@ -16,7 +16,10 @@ import {
 	ScrollView,
 } from 'react-native';
 
-import { useDimensions } from '@react-native-community/hooks';
+import {
+	useDimensions,
+	useDeviceOrientation,
+} from '@react-native-community/hooks';
 
 export default function App() {
 	const handleOnPress = () => console.log('text pressed');
@@ -27,6 +30,9 @@ export default function App() {
 
 	// dimensions from hook for detecting screen rotation
 	console.log(useDimensions());
+	console.log(useDeviceOrientation());
+
+	const { landscape } = useDeviceOrientation();
 
 	return (
 		//style can take array to apply multiple styles
@@ -110,6 +116,14 @@ export default function App() {
 						backgroundColor: 'lightblue',
 						width: '50%',
 						height: 70,
+					}}>
+					<Text>width 50%</Text>
+				</View>
+				<View
+					style={{
+						backgroundColor: 'red',
+						width: '50%',
+						height: landscape ? '100%' : '30%', //calculate height base on screen rotation
 					}}>
 					<Text>width 50%</Text>
 				</View>
