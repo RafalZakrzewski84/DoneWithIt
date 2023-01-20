@@ -38,7 +38,7 @@ export default function App() {
 		//style can take array to apply multiple styles
 		<SafeAreaView style={[styles.container, viewBackground]}>
 			<StatusBar style="auto" />
-			<ScrollView>
+			{/* <ScrollView>
 				<Text numberOfLines={1} onPress={handleOnPress}>
 					Used to truncate the text with an ellipsis after computing the text
 					layout, including line wrapping, such that the total number of lines
@@ -100,10 +100,10 @@ export default function App() {
 					onPress={() =>
 						Alert.prompt('Your title', 'Your msg', (text) => console.log(text))
 					}
-				/>
+				/> */}
 
-				{/* layouts */}
-				<View
+			{/* layouts */}
+			{/* <View
 					style={{
 						backgroundColor: 'blue',
 						width: 150,
@@ -125,9 +125,31 @@ export default function App() {
 						width: '50%',
 						height: landscape ? '100%' : '30%', //calculate height base on screen rotation
 					}}>
-					<Text>width 50%</Text>
+					<Text>height calculated</Text>
 				</View>
-			</ScrollView>
+			</ScrollView> */}
+
+			<View
+				style={{
+					backgroundColor: 'dodgerblue',
+					width: 100,
+					height: 100,
+				}}
+			/>
+			<View
+				style={{
+					backgroundColor: 'gold',
+					width: 100,
+					height: 100,
+				}}
+			/>
+			<View
+				style={{
+					backgroundColor: 'tomato',
+					width: 100,
+					height: 100,
+				}}
+			/>
 		</SafeAreaView>
 	);
 }
@@ -137,6 +159,8 @@ const viewBackground = { backgroundColor: 'lightgreen' };
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
+		flexDirection: 'row',
+		justifyContent: 'center',
 		paddingTop: Platform.OS === 'android' ? ReactStatusBar.currentHeight : 0, //calculate padding for android base on status bar height
 	},
 	forFavicon: {
